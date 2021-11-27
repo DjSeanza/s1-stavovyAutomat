@@ -12,13 +12,16 @@ public class Stav {
         this.stavy = new Stavy[][]{{Stavy.S0, Stavy.S0, Stavy.S0, Stavy.S1},
                                    {Stavy.S1, Stavy.S2, Stavy.S0, Stavy.S1},
                                    {Stavy.S1, Stavy.S2, Stavy.S2, Stavy.S3},
-                                   {Stavy.S3, Stavy.S3, Stavy.S2, Stavy.S3}};
+                                   {Stavy.S3, null, Stavy.S2, Stavy.S3}};
     }
 
-    public void zmenaStavu(String vstup) {
+    public void zmenaStavu(String vstup) throws ZakazanyStavException {
         if (vstup.equals("0,0")) {
             this.stav = this.stavy[this.stav.getHodnota()][0];
         } else if (vstup.equals("1,0")) {
+            if (this.stavy[this.stav.getHodnota()][1] == null) {
+                throw new ZakazanyStavException("Tento stav je zakázaný!");
+            }
             this.stav = this.stavy[this.stav.getHodnota()][1];
         } else if (vstup.equals("1,1")) {
             this.stav = this.stavy[this.stav.getHodnota()][2];

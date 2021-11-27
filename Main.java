@@ -18,7 +18,12 @@ public class Main {
         String vstup = scanner.next();
 
         while (!vstup.equals("exit")) {
-            stavy.zmenaStavu(vstup);
+            try {
+                stavy.zmenaStavu(vstup);
+            } catch (ZakazanyStavException e) {
+                e.printStackTrace();
+            }
+
             stavy.vypis();
             System.out.println("Ak si prajete skončiť do vstupu zadajte exit.");
             System.out.print("Zadajte vstup: ");
